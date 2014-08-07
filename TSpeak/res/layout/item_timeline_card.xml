@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/listviewGray"
+    android:clickable="false"
+    android:orientation="vertical"
+    android:padding="4dp" >
+
+    <RelativeLayout
+        android:id="@+id/item_home_cardlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_background_white"
+        android:padding="8dp" >
+
+        <ImageView
+            android:id="@+id/item_home_headicon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/item_home_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/item_home_headicon"
+            android:layout_toRightOf="@id/item_home_headicon"
+            android:textColor="@color/topic"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/item_home_name"
+            android:layout_toRightOf="@id/item_home_name"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="转发:"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/item_home_reposts_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 评论:"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/item_home_comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_home_createdtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_home_name"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/item_home_headicon"
+            android:textColor="@color/topic"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/item_home_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/item_home_createdtime"
+            android:layout_alignTop="@id/item_home_createdtime"
+            android:layout_below="@id/item_home_name"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/item_home_createdtime"
+            android:textColor="@color/source"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/item_home_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/item_home_headicon"
+            android:layout_below="@id/item_home_headicon"
+            android:lineSpacingExtra="5dip"
+            android:lineSpacingMultiplier="1"
+            android:paddingTop="3dp"
+            android:singleLine="false"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/item_home_midpic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/item_home_content"
+            android:maxHeight="200dp"
+            android:maxWidth="200dp"
+            android:padding="2dp"
+            android:visibility="gone" />
+
+        <GridLayout
+            android:id="@+id/item_home_gridlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/item_home_headicon"
+            android:layout_below="@id/item_home_content"
+            android:clickable="false"
+            android:columnCount="3"
+            android:orientation="horizontal"
+            android:rowCount="3"
+            android:useDefaultMargins="false"
+            android:visibility="gone" >
+
+            <ImageView style="@style/listViewMultiImageView" />
+
+            <ImageView style="@style/listViewMultiImageView" />
+
+            <ImageView style="@style/listViewMultiImageView" />
+
+            <ImageView style="@style/listViewMultiImageView" />
+
+            <ImageView style="@style/listViewMultiImageView" />
+
+            <ImageView style="@style/listViewMultiImageView" />
+
+            <ImageView style="@style/listViewMultiImageView" />
+
+            <ImageView style="@style/listViewMultiImageView" />
+
+            <ImageView style="@style/listViewMultiImageView" />
+        </GridLayout>
+
+        <RelativeLayout
+            android:id="@+id/item_home_retweeted_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_home_content"
+            android:padding="3dp"
+            android:visibility="gone" >
+
+            <LinearLayout
+                android:id="@+id/item_home_retweeted_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentTop="true"
+                android:background="@color/item_line"
+                android:orientation="horizontal" >
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/item_home_re_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/item_home_retweeted_line"
+                android:layout_marginLeft="2dp"
+                android:lineSpacingExtra="5dip"
+                android:lineSpacingMultiplier="1"
+                android:paddingTop="3dp"
+                android:singleLine="false"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/item_home_re_midpic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/item_home_retweeted_line"
+                android:layout_below="@id/item_home_re_content"
+                android:maxHeight="200dp"
+                android:maxWidth="200dp"
+                android:padding="2dp"
+                android:visibility="gone" />
+
+            <GridLayout
+                android:id="@+id/item_home_re_gridlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/item_home_retweeted_line"
+                android:layout_below="@id/item_home_re_content"
+                android:clickable="false"
+                android:columnCount="3"
+                android:orientation="horizontal"
+                android:rowCount="3"
+                android:useDefaultMargins="false"
+                android:visibility="gone" >
+
+                <ImageView style="@style/listViewMultiImageView" />
+
+                <ImageView style="@style/listViewMultiImageView" />
+
+                <ImageView style="@style/listViewMultiImageView" />
+
+                <ImageView style="@style/listViewMultiImageView" />
+
+                <ImageView style="@style/listViewMultiImageView" />
+
+                <ImageView style="@style/listViewMultiImageView" />
+
+                <ImageView style="@style/listViewMultiImageView" />
+
+                <ImageView style="@style/listViewMultiImageView" />
+
+                <ImageView style="@style/listViewMultiImageView" />
+            </GridLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

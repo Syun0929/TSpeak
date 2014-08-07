@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <ImageView
+            android:id="@+id/write_image_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.2"
+            android:scaleType="centerCrop" />
+
+        <EditText
+            android:id="@+id/write_new_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="true"
+            android:gravity="left|top"
+            android:hint="@string/saysomething"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical" />
+    </FrameLayout>
+
+    <CheckBox
+        android:id="@+id/write_cb_repost_or_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+    </CheckBox>
+
+    <LinearLayout
+        android:id="@+id/write_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/write_menu_add_pic"
+            style="@style/ActionButton.CloseMode.Tsang"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_photo" />
+
+        <ImageButton
+            android:id="@+id/write_menu_at"
+            style="@style/ActionButton.CloseMode.Tsang"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_attach" />
+
+        <ImageButton
+            android:id="@+id/write_menu_emoji"
+            style="@style/ActionButton.CloseMode.Tsang"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_user" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/write_menu_send"
+            style="@style/ActionButton.CloseMode.Tsang"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/ic_action_send"
+            android:gravity="right|center_vertical"
+            android:text="@string/send"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.ActionBar.Menu"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/write_gd_emotion"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"
+        android:columnWidth="40dp"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="15dp"
+        android:visibility="gone" >
+    </GridView>
+
+</LinearLayout>

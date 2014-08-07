@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/listviewGray" >
+
+    <LinearLayout
+        android:id="@+id/single_barmenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#f0000000"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/single_repost"
+            style="@style/ActionButton.CloseMode.Tsang"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="转发"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.ActionBar.Menu"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/single_comment"
+            style="@style/ActionButton.CloseMode.Tsang"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="评论"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.ActionBar.Menu"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/single_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/single_barmenu"
+        android:background="@drawable/card_background_white"
+        android:padding="2dp" >
+    </ListView>
+
+</RelativeLayout>

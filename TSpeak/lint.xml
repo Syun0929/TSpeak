@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="HandlerLeak" severity="ignore" />
+    <issue id="NewApi" severity="ignore">
+        <ignore path="src/com/tsang/tspeak/NewStatusActivity.java" />
+    </issue>
+    <issue id="SdCardPath">
+        <ignore path="src/com/tsang/tspeak/util/AsyncBitmapLoader.java" />
+    </issue>
+    <issue id="SimpleDateFormat" severity="ignore">
+        <ignore path="src/com/tsang/tspeak/LoginActivity.java" />
+    </issue>
+</lint>

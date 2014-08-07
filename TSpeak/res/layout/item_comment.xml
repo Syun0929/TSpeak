@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dp" >
+
+    <ImageView
+        android:id="@+id/item_comment_headicon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/item_comment_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/item_comment_headicon"
+        android:layout_toRightOf="@id/item_comment_headicon"
+        android:textColor="@color/source"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/item_comment_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/item_comment_name"
+        android:layout_below="@id/item_comment_name"
+        android:lineSpacingExtra="5dip"
+        android:lineSpacingMultiplier="1"
+        android:paddingTop="3dp"
+        android:singleLine="false"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/item_comment_createdtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/item_comment_content"
+        android:layout_below="@id/item_comment_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/source"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/item_comment_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/item_comment_createdtime"
+        android:layout_alignTop="@id/item_comment_createdtime"
+        android:layout_below="@id/item_comment_content"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/item_comment_createdtime"
+        android:textColor="@color/source"
+        android:textSize="12sp" />
+
+</RelativeLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TSpeak</string>
+    <string name="app_all_name">TSpeak新浪微博客户端</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="usericon">用户头像</string>
+    <string name="login">登录</string>
+    <string name="adduser">添加用户</string>
+    <string name="deleteuser">删除用户</string>
+    <string name="login_notify">根据新浪开放平台政策，授权令牌有效时间为90天，过期后请重新添加用户进行授权。否则将无法加载微博信息，谢谢使用。</string>
+    <string name="homepage">首页</string>
+    <string name="person_data_page">个人主页</string>
+    <string name="show_the_picture">查看图片</string>
+    <string name="single_status">微博正文</string>
+    <string name="at_friends">提到</string>
+    <string name="come_from">来自:</string>
+    
+    <string name="send">发送</string>
+    <string name="saysomething">大千世界，如是我闻。</string>
+    <string name="write">发微博</string>
+    <string name="repost">转发微博</string>
+    <string name="comment">评论微博</string>
+    <string name="delete">删除微博</string>
+    <string name="repost_count">转发</string>
+    <string name="comment_count">评论</string>
+    <string name="comment_in_the_sametime">同时评论微博</string>
+    <string name="repost_in_the_sametime">同时转发微博</string>
+    
+    <string name="exitBy2Click">再按一次退出程序</string>
+    <string name="network_error">网络异常</string>
+    
+    <string name="notify_sending">正在发送……</string>
+    <string name="notify_send_done">发送成功</string>
+    <string name="notify_send_failed">发送失败</string>
+    
+    <string name="notify_deleting">正在删除……</string>
+    <string name="notify_delete_done">删除成功</string>
+    <string name="notify_delete_failed">删除失败</string>
+    
+    <string name="content_cant_be_empty_and_donot_have_account">微博内容和授权令牌为空</string>
+    <string name="content_cant_be_empty">微博内容为空</string>
+    <string name="donot_have_account">身份令牌为空</string>
+    <string name="content_words_number_more_than_140">字数超过140个</string>
+    
+    <string name="open_left_drawer">Open Drawer</string>
+    <string name="open_right_drawer">Open Right Drawer</string>
+    <string name="close_left_drawer">Open Drawer</string>
+    
+    <string-array name="menu_list">
+        <item>首页</item>
+        <item>资料</item>
+        <item>设置</item>
+        <item>注销</item>
+        <item>退出</item>
+    </string-array>
+    
+     <!-- 获取 Token -->
+    <string name="weibosdk_demo_obtain_token_via_signature">通过应用签名信息获取 Token</string>
+    <string name="weibosdk_demo_obtain_token_via_sso">通过单点登录 (SSO) 获取 Token</string>
+    <string name="weibosdk_demo_obtain_token_via_code">通过 Code 获取 Token</string>
+    <string name="weibosdk_demo_token_info">Token 信息：</string>
+    <string name="weibosdk_demo_token_has_existed">Token 仍在有效期内，无需再次登录。</string>
+    <string name="weibosdk_demo_obtain_token_hint"><b>请注意：</b>\n<li>SSO 登录需要微博客户端的支持，目前仅 3.0.0 及以上微博客户端版本支持 SSO；如果未安装，将自动转为 Oauth2.0 Web 授权认证（即第一种认证方式）</li>\n<li>如果您通过方式一和方式二获取不到 Token，而是获取到 code，那说明您的包名和签名存在问题，请到开放平台注册包名和签名。详情请查看 FAQ 文档</li></string>
+    <string name="weibosdk_demo_obtain_token_via_sso_hint">使用 SSO 登录前，请检查手机上是否已经安装新浪微博客户端，目前仅 3.0.0 及以上微博客户端版本支持 SSO；如果未安装，将自动转为 Oauth2.0 进行认证。</string>
+    <string name="weibosdk_demo_obtain_token_via_code_hint"><b>请注意：</b>基于以下几点原因，您可能不想使用前面的两种授权方式：\n<li>出于安全性的考虑，您不信任目前使用应用的包名和签名来获取 Token 的方式</li>\n<li>您不想安装微博客户端</li>\n您可以自行通过 Code 来获取 Token。通过这种方式需要使用到 APP_SECRET，请务必妥善保管好自己的 APP_SECRET，<b>不要直接暴露在程序中，泄露有风险</b>。\n<b>更多细节请查看：</b><a href="http://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E#Web.E5.BA.94.E7.94.A8.E7.9A.84.E9.AA.8C.E8.AF.81.E6.8E.88.E6.9D.83">验证授权步骤</a></string>
+    <string name="weibosdk_demo_step_to_obtain_code">第一步：获取 Code</string>
+    <string name="weibosdk_demo_step_to_obtain_token">第二步：通过 Code 获取 Token</string>
+    <string name="weibosdk_demo_code_text_hint">第一步获取到的 Code：（一次性有效）</string>
+    <string name="weibosdk_demo_token_text_hint">第二步获取到的 Token：</string>
+    <string name="weibosdk_demo_token_to_string_format">Token：%1$s \nRefresh Token：%2$s \nexpires_in：%3$s</string>
+    <string name="weibosdk_demo_token_to_string_format_1">Token：%1$s \n有效期：%2$s</string>
+    <string name="weibosdk_demo_toast_auth_success">授权成功</string>
+    <string name="weibosdk_demo_toast_auth_failed">授权失败</string>
+    <string name="weibosdk_demo_toast_auth_canceled">取消授权</string>
+    <string name="weibosdk_demo_toast_obtain_code_success">获取 Code 成功</string>
+    <string name="weibosdk_demo_toast_obtain_code_failed">获取 Code 失败</string>
+    <string name="weibosdk_demo_toast_obtain_token_success">获取 Token 成功</string>
+    <string name="weibosdk_demo_toast_obtain_token_failed">获取 Token 失败</string> 
+
+</resources>
