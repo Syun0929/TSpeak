@@ -55,8 +55,6 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 	private static int mPage = 0;
 	private List<Weibo> weiboList = new ArrayList<Weibo>();
 
-	
-
 	public final static int PULL_TO_REFRESH = 0x11;
 	public final static int PUSH_TO_LOADMORE = 0x12;
 
@@ -91,7 +89,7 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 
 		mHomeList = (ListView) view.findViewById(R.id.ptr_homelist);
 		mWeiboAdapter = new WeiboAdapter(mContext);
-		AnimationAdapter AnimationAdapter = new ScaleInAnimationAdapter(
+		AnimationAdapter AnimationAdapter = new SwingBottomInAnimationAdapter(
 				mWeiboAdapter);
 		AnimationAdapter.setAbsListView(mHomeList);
 		mHomeList.setAdapter(AnimationAdapter);
@@ -142,8 +140,8 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 
 	private String returnTheHomeTimeLineUrl(String token, int count, int page) {
 		String result;
-		result = Constants.HOME_TIMELINE_URL + "?access_token=" + token + "&count="
-				+ count + "&page=" + page;
+		result = Constants.HOME_TIMELINE_URL + "?access_token=" + token
+				+ "&count=" + count + "&page=" + page;
 		return result;
 	}
 
@@ -172,14 +170,12 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 			super.onPreExecute();
 			if (mType == PULL_TO_REFRESH) {
 				mPullToRefreshLayout.setRefreshing(true);
-				
+
 			}
 			if (mType == PUSH_TO_LOADMORE) {
 
 			}
 		}
-		
-		
 
 		@Override
 		protected List<Weibo> doInBackground(String... params) {
@@ -215,13 +211,13 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					Log.e(TAG, "IOException=====>"+e.getMessage());
+					Log.e(TAG, "IOException=====>" + e.getMessage());
 				}
-			}else{
+			} else {
 				Log.e(TAG, "NoNetWork!!!!!!!!!!!!!!!!!!!!!!!!!");
 			}
-			if(json.contains("error")){
-			 Log.e(TAG, "json========>" + json);
+			if (json.contains("error")) {
+				Log.e(TAG, "json========>" + json);
 			}
 			try {
 				if (null != json) {
@@ -236,7 +232,8 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 						String createdtime = weiboObject.isNull("created_at") ? ""
 								: weiboObject.getString("created_at");
 						weibo.setCreatedTime(Utils.getCSTDate(createdtime));
-//						Log.e(TAG, "time===>" + Utils.getCSTDate(createdtime));
+						// Log.e(TAG, "time===>" +
+						// Utils.getCSTDate(createdtime));
 
 						weibo.setReposts_count(weiboObject
 								.isNull("reposts_count") ? "" : weiboObject
@@ -250,7 +247,7 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 						Pattern p = Pattern.compile("<a.*?>(.*?)</a>");
 						Matcher m = p.matcher(source);
 						while (m.find()) {
-//							Log.e(TAG, "Source2===>" + m.group(1));
+							// Log.e(TAG, "Source2===>" + m.group(1));
 							weibo.setSource("ю╢вт:" + m.group(1));
 						}
 						weibo.setText(weiboObject.isNull("text") ? ""
@@ -295,9 +292,9 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 							weibo.setRetweeted_Midpic_Url(retweetObject
 									.isNull("bmiddle_pic") ? "" : retweetObject
 									.getString("bmiddle_pic"));
-//							Log.e(TAG,
-//									"re_bmiddle_pic======>"
-//											+ weibo.getRetweeted_Midpic_Url());
+							// Log.e(TAG,
+							// "re_bmiddle_pic======>"
+							// + weibo.getRetweeted_Midpic_Url());
 							JSONObject retweetuserObject = retweetObject
 									.getJSONObject("user");
 							weibo.setRetweeted_Screen_name(retweetuserObject
@@ -324,7 +321,7 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				Log.e(TAG, "JSONException=====>"+e.getMessage());
+				Log.e(TAG, "JSONException=====>" + e.getMessage());
 			}
 
 			return weiboList;
@@ -379,7 +376,8 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 		bundle.putString("weiboSource", weibo.getSource());
 		bundle.putString("weiboText", weibo.getText());
 		bundle.putString("weiboUID", weibo.getUID());
-		bundle.putBoolean("weiboHasRetweetedStatus", weibo.isHasretweeted_status());
+		bundle.putBoolean("weiboHasRetweetedStatus",
+				weibo.isHasretweeted_status());
 		bundle.putStringArray("weiboPic_Urls", weibo.getPic_Urls());
 		bundle.putStringArray("weiboRetweeted_Pic_Urls",
 				weibo.getRetweeted_Pic_Urls());
@@ -387,7 +385,7 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 		Intent intent = new Intent(mContext, SingleStatusActivity.class);
 		intent.putExtras(bundle);
 		startActivity(intent);
-		//Log.e(TAG, "weiboID====>" + weibo.getID());
+		// Log.e(TAG, "weiboID====>" + weibo.getID());
 	}
 
 }
