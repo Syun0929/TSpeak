@@ -35,6 +35,7 @@ import com.tsang.tspeak.R;
 import com.tsang.tspeak.model.Emotions;
 import com.tsang.tspeak.model.LoginInfo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -50,6 +51,7 @@ import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -397,5 +399,24 @@ public class Utils {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(path);
         return matcher.matches();
+	}
+	
+	/**
+	 * 设置在android4.4以上的系统中，设置状态栏和虚拟按键透明，扩大可视区域。状态栏可以设置成与actionbar一样的颜色
+	 */
+	public static void setStatusBarTheme(Activity activity) {
+		if (android.os.Build.VERSION.SDK_INT > 18) {
+			// 设置状态栏和虚拟按键透明
+			Window window = activity.getWindow();
+			window.setFlags(0x04000000, 0x04000000);
+			window.setFlags(0x08000000, 0x08000000);
+			SystemBarTintManager tintManager = new SystemBarTintManager(
+					activity);
+			// v.setPadding(0, tintManager.mConfig.getActionBarHeight()
+			// + tintManager.mConfig.getStatusBarHeight(), 0, 0);
+			tintManager.setStatusBarTintEnabled(true);
+			tintManager.setStatusBarTintResource(R.color.actionbar_bg);
+		}
+
 	}
 }

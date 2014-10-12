@@ -35,7 +35,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class FriendsActivity extends ActionBarActivity implements
+public class FriendsActivity extends BaseActivity implements
 		OnItemClickListener, OnScrollListener, OnRefreshListener {
 
 	private static final String TAG = "FriendsActivity";

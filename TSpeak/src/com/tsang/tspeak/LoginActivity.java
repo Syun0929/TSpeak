@@ -51,7 +51,7 @@ import com.tsang.tspeak.model.db.TSpeakDataHelper;
 import com.tsang.tspeak.util.Constants;
 import com.tsang.tspeak.util.Utils;
 
-public class LoginActivity extends ActionBarActivity implements
+public class LoginActivity extends BaseActivity  implements
 		OnDismissCallback {
 
 	private static final String TAG = "LoginActivity";

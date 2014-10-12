@@ -64,7 +64,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class PersonActivity extends ActionBarActivity implements
+public class PersonActivity extends BaseActivity  implements
 		OnRefreshListener, OnScrollListener, OnItemClickListener,
 		OnDismissCallback, OnCreateContextMenuListener, RequestListener {
 	public static final String TAG = "PersonActivity";

@@ -51,7 +51,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends BaseActivity {
 
 	static final String TAG = "MainActivity";
 

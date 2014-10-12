@@ -45,7 +45,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class SingleStatusActivity extends ActionBarActivity implements
+public class SingleStatusActivity extends BaseActivity implements
 		OnScrollListener {
 
 	private final static String TAG = "SingleStatusActivity";

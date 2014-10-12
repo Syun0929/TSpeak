@@ -23,7 +23,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class ImagePagerActivity extends ActionBarActivity {
+public class ImagePagerActivity extends BaseActivity  {
 
 	private static final String STATE_POSITION = "STATE_POSITION";
 	private ImageLoader imageLoader;
