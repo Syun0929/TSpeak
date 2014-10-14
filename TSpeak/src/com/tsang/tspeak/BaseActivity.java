@@ -12,7 +12,7 @@ public class BaseActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		Utils.setStatusBarTheme(this);
+//		Utils.setStatusBarTheme(this);
 	}
 
 }

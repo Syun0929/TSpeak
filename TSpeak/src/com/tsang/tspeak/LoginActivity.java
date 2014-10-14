@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -30,6 +31,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.haarman.listviewanimations.itemmanipulation.OnDismissCallback;
@@ -51,8 +53,7 @@ import com.tsang.tspeak.model.db.TSpeakDataHelper;
 import com.tsang.tspeak.util.Constants;
 import com.tsang.tspeak.util.Utils;
 
-public class LoginActivity extends BaseActivity  implements
-		OnDismissCallback {
+public class LoginActivity extends BaseActivity implements OnDismissCallback {
 
 	private static final String TAG = "LoginActivity";
 	private ListView mListView;
@@ -63,8 +64,6 @@ public class LoginActivity extends BaseActivity  implements
 	private String mToken;
 	private String mUserId;
 	private AdapterContextMenuInfo menuInfo;
-
-	
 
 	/** 消息 */
 	private static final int MSG_DATA_CHANGE = 1;
@@ -101,14 +100,19 @@ public class LoginActivity extends BaseActivity  implements
 
 	};
 
+	RelativeLayout mLayout;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+
+		mLayout = (RelativeLayout) findViewById(R.id.login_layout);
+		Utils.setStatusBarTheme(this, mLayout);
 		getSupportActionBar().setTitle(R.string.login);
-		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		mListView = (ListView) findViewById(R.id.login_list);
 		mBtnAdd = (ImageButton) findViewById(R.id.login_btn_adduser);
 		dataHelper = new TSpeakDataHelper(this);
@@ -166,7 +170,14 @@ public class LoginActivity extends BaseActivity  implements
 				});
 
 	}
-	
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		new MenuInflater(this).inflate(R.menu.login, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
@@ -175,11 +186,15 @@ public class LoginActivity extends BaseActivity  implements
 		}
 		switch (item.getItemId()) {
 		case android.R.id.home:
-//			Intent intent = new Intent(this, MainActivity.class);
-//			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-//					| Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//			startActivity(intent);
+			// Intent intent = new Intent(this, MainActivity.class);
+			// intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+			// | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			// startActivity(intent);
 			finish();
+			break;
+		case R.id.action_login:
+			mWeiboAuth
+					.authorize(new AuthListener(), WeiboAuth.OBTAIN_AUTH_CODE);
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -203,7 +218,6 @@ public class LoginActivity extends BaseActivity  implements
 		}
 		return true;
 	}
-	
 
 	/**
 	 * 微博认证授权回调类。
@@ -263,8 +277,8 @@ public class LoginActivity extends BaseActivity  implements
 		 * 请注意： {@link RequestListener} 对应的回调是运行在后台线程中的， 因此，需要使用 Handler 来配合更新
 		 * UI。
 		 */
-		AsyncWeiboRunner.request(Constants.OAUTH2_ACCESS_TOKEN_URL, requestParams,
-				"POST", new RequestListener() {
+		AsyncWeiboRunner.request(Constants.OAUTH2_ACCESS_TOKEN_URL,
+				requestParams, "POST", new RequestListener() {
 
 					@Override
 					public void onComplete(String response) {
@@ -284,8 +298,9 @@ public class LoginActivity extends BaseActivity  implements
 
 							try {
 								LoginInfo loginInfo = parseLoginJsonData(
-										LoginActivity.this, Constants.USER_SHOW_URL,
-										mToken, mUserId);
+										LoginActivity.this,
+										Constants.USER_SHOW_URL, mToken,
+										mUserId);
 								if (!dataHelper.HaveUserInfo(mUserId)) {
 									dataHelper.InsertLoginInfo(loginInfo);
 								}

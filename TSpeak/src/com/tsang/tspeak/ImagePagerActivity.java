@@ -4,6 +4,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.tsang.tspeak.util.Utils;
 import com.tsang.tspeak.view.photoview.PhotoView;
 
 import android.app.Activity;
@@ -21,22 +22,27 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class ImagePagerActivity extends BaseActivity  {
+public class ImagePagerActivity extends BaseActivity {
 
 	private static final String STATE_POSITION = "STATE_POSITION";
 	private ImageLoader imageLoader;
 	private DisplayImageOptions options;
 	private ViewPager pager;
+	private RelativeLayout mLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_imagepager);
-		
-		getSupportActionBar().setTitle(getResources().getString(R.string.show_the_picture));
+		mLayout = (RelativeLayout) findViewById(R.id.layout_imagepager);
+		Utils.setStatusBarTheme(this, mLayout);
+
+		getSupportActionBar().setTitle(
+				getResources().getString(R.string.show_the_picture));
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -50,11 +56,9 @@ public class ImagePagerActivity extends BaseActivity  {
 		}
 
 		imageLoader = ImageLoader.getInstance();
-		options = new DisplayImageOptions.Builder()
-				.showImageOnLoading(null)
-				.showImageForEmptyUri(null)
-				.showImageOnFail(null).cacheInMemory(true)
-				.cacheOnDisk(true).considerExifParams(true)
+		options = new DisplayImageOptions.Builder().showImageOnLoading(null)
+				.showImageForEmptyUri(null).showImageOnFail(null)
+				.cacheInMemory(true).cacheOnDisk(true).considerExifParams(true)
 				.bitmapConfig(Bitmap.Config.ARGB_8888).build();
 
 		pager = (ViewPager) findViewById(R.id.activity_pager);
@@ -62,7 +66,7 @@ public class ImagePagerActivity extends BaseActivity  {
 		pager.setCurrentItem(pagerPosition);
 
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
@@ -170,7 +174,8 @@ public class ImagePagerActivity extends BaseActivity  {
 							spinner.setVisibility(View.GONE);
 						}
 					});
-			view.addView(imageLayout, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+			view.addView(imageLayout, LayoutParams.MATCH_PARENT,
+					LayoutParams.MATCH_PARENT);
 			return imageLayout;
 		}
 

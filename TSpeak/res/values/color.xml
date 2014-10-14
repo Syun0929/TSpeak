@@ -9,5 +9,6 @@
     <color name="topic">#ff7d00</color>
     <color name="source">#494949</color>
     <color name="actionbar_bg">#00ace7</color>
+    <color name="actionbar_bg_pressed">#0f92bf</color>
 
 </resources>

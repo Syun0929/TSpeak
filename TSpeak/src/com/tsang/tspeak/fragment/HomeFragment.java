@@ -15,12 +15,14 @@ import com.haarman.listviewanimations.swinginadapters.AnimationAdapter;
 import com.haarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
 import com.haarman.listviewanimations.swinginadapters.prepared.ScaleInAnimationAdapter;
 import com.haarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
+import com.tsang.tspeak.NewStatusActivity;
 import com.tsang.tspeak.R;
 import com.tsang.tspeak.SingleStatusActivity;
 import com.tsang.tspeak.adapter.WeiboAdapter;
 import com.tsang.tspeak.model.Weibo;
 import com.tsang.tspeak.util.Constants;
 import com.tsang.tspeak.util.Utils;
+import com.tsang.tspeak.view.fab.FloatingActionButton;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
@@ -35,6 +37,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -95,6 +98,25 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 		mHomeList.setAdapter(AnimationAdapter);
 		mHomeList.setOnScrollListener(this);
 		mHomeList.setOnItemClickListener(this);
+
+		FloatingActionButton floatingActionButton = (FloatingActionButton) view
+				.findViewById(R.id.button_floating_action);
+		floatingActionButton.attachToListView(mHomeList);
+		floatingActionButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getActivity(),
+						NewStatusActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("token", mToken);
+				// bundle.putString("uid", mUId);
+				bundle.putInt("type", NewStatusActivity.TYPE_NEW);
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+		});
 
 		AddItemToContainer(1, PULL_TO_REFRESH);
 

@@ -48,6 +48,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,16 +74,19 @@ public class MainActivity extends BaseActivity {
 	private static boolean isExit = false;
 
 	public static List<Emotions> emotionList = new ArrayList<Emotions>();
+	RelativeLayout mLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		mLayout = (RelativeLayout) findViewById(R.id.layout_main);
 		dataHelper = new TSpeakDataHelper(this);
 		MENU_ITEMS = getResources().getStringArray(R.array.menu_list);
 		mImageLoader = ImageLoader.getInstance();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drw_layout);
+		Utils.setStatusBarTheme(this, mLayout);
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
 				GravityCompat.START);
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
@@ -235,15 +239,15 @@ public class MainActivity extends BaseActivity {
 			item.setChecked(true);
 		}
 		switch (item.getItemId()) {
-		case R.id.write_new_status:
-			Intent intent = new Intent(this, NewStatusActivity.class);
-			Bundle bundle = new Bundle();
-			bundle.putString("token", mToken);
-			bundle.putString("uid", mUId);
-			bundle.putInt("type", NewStatusActivity.TYPE_NEW);
-			intent.putExtras(bundle);
-			startActivity(intent);
-			break;
+//		case R.id.write_new_status:
+//			Intent intent = new Intent(this, NewStatusActivity.class);
+//			Bundle bundle = new Bundle();
+//			bundle.putString("token", mToken);
+//			bundle.putString("uid", mUId);
+//			bundle.putInt("type", NewStatusActivity.TYPE_NEW);
+//			intent.putExtras(bundle);
+//			startActivity(intent);
+//			break;
 		}
 		return super.onOptionsItemSelected(item);
 

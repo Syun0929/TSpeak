@@ -64,9 +64,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class PersonActivity extends BaseActivity  implements
-		OnRefreshListener, OnScrollListener, OnItemClickListener,
-		OnDismissCallback, OnCreateContextMenuListener, RequestListener {
+public class PersonActivity extends BaseActivity implements OnRefreshListener,
+		OnScrollListener, OnItemClickListener, OnDismissCallback,
+		OnCreateContextMenuListener, RequestListener {
 	public static final String TAG = "PersonActivity";
 
 	private PullToRefreshLayout mPullToRefreshLayout;
@@ -128,6 +128,8 @@ public class PersonActivity extends BaseActivity  implements
 						getResources().getString(R.string.network_error))
 				.setSmallIcon(R.drawable.notify_cancel).build();
 		mPullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.ptr_layout_person);
+		Utils.setStatusBarTheme(this, mPullToRefreshLayout);
+
 		ActionBarPullToRefresh.from(this).allChildrenArePullable()
 				.listener(this).setup(mPullToRefreshLayout);
 		view = LayoutInflater.from(this).inflate(R.layout.view_person_data,

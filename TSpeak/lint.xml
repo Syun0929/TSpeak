@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
     <issue id="HandlerLeak" severity="ignore" />
+    <issue id="InlinedApi">
+        <ignore path="src/com/tsang/tspeak/util/Utils.java" />
+    </issue>
     <issue id="NewApi" severity="ignore">
         <ignore path="src/com/tsang/tspeak/NewStatusActivity.java" />
     </issue>

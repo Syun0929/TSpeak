@@ -49,9 +49,11 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -62,7 +64,6 @@ import android.widget.ListView;
  * 
  */
 public class Utils {
-	
 
 	/** 检查网络是否连接 */
 	public static boolean checkConnection(Context context) {
@@ -220,12 +221,11 @@ public class Utils {
 						start, end, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
 			}
 		}
-		
-		
-		if(content.contains("[")&&content.contains("]")){
+
+		if (content.contains("[") && content.contains("]")) {
 			Pattern p = Pattern.compile(Constants.regex_emoji);
 			Matcher m = p.matcher(result);
-			while(m.find()){
+			while (m.find()) {
 				int start = m.start();
 				int end = m.end();
 				String phrase = content.substring(start, end);
@@ -257,9 +257,9 @@ public class Utils {
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
 				}
-				
+
 			}
-			
+
 		}
 
 		return result;
@@ -365,19 +365,21 @@ public class Utils {
 
 	/**
 	 * 打开图片浏览大图
+	 * 
 	 * @param context
 	 * @param url
 	 */
 	public static void startImagePagerActivity(Context context, String url) {
-		String result =url.replace("bmiddle", "large");
+		String result = url.replace("bmiddle", "large");
 		Intent intent = new Intent(context, ImagePagerActivity.class);
-		String[] urls = { result};
+		String[] urls = { result };
 		intent.putExtra("images", urls);
 		context.startActivity(intent);
 	}
 
 	/**
 	 * 打开图片浏览大图
+	 * 
 	 * @param context
 	 * @param urls
 	 * @param position
@@ -393,30 +395,72 @@ public class Utils {
 		intent.putExtra("pagerPosition", position);
 		context.startActivity(intent);
 	}
-	
-	public static boolean isFilePath(String path){
+
+	public static boolean isFilePath(String path) {
 		String regex = "[a-zA-Z]:(?:[/\\\\][^/\\\\:*?\"<>|]{1,255})+";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(path);
-        return matcher.matches();
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(path);
+		return matcher.matches();
 	}
-	
 	/**
 	 * 设置在android4.4以上的系统中，设置状态栏和虚拟按键透明，扩大可视区域。状态栏可以设置成与actionbar一样的颜色
 	 */
-	public static void setStatusBarTheme(Activity activity) {
+	public static void setStatusBarTheme(Activity activity, View v) {
 		if (android.os.Build.VERSION.SDK_INT > 18) {
 			// 设置状态栏和虚拟按键透明
 			Window window = activity.getWindow();
-			window.setFlags(0x04000000, 0x04000000);
-			window.setFlags(0x08000000, 0x08000000);
-			SystemBarTintManager tintManager = new SystemBarTintManager(
-					activity);
-			// v.setPadding(0, tintManager.mConfig.getActionBarHeight()
-			// + tintManager.mConfig.getStatusBarHeight(), 0, 0);
-			tintManager.setStatusBarTintEnabled(true);
-			tintManager.setStatusBarTintResource(R.color.actionbar_bg);
-		}
+			window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+					WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			window.setFlags(
+					WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
+					WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+			// window.setFlags(0x04000000, 0x04000000);
+			// window.setFlags(0x08000000, 0x08000000);
 
+			v.setPadding(0, getActionBarHeight(activity)
+					+ getStatusBarHeight(activity), 0, 0);
+		}
+		SystemBarTintManager tintManager = new SystemBarTintManager(activity);
+		tintManager.setStatusBarTintEnabled(true);
+		tintManager.setStatusBarTintResource(R.color.actionbar_bg);
+
+	}
+
+	public static int getStatusBarHeight(Activity activity) {
+		int x = 0, statusBarHeight = 0;
+		Class<?> c = null;
+		Object obj = null;
+		Field field = null;
+		try {
+			c = Class.forName("com.android.internal.R$dimen");
+			obj = c.newInstance();
+			field = c.getField("status_bar_height");
+			x = Integer.parseInt(field.get(obj).toString());
+			statusBarHeight = activity.getResources().getDimensionPixelSize(x);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return statusBarHeight;
+	}
+
+	public static int getActionBarHeight(Activity activity) {
+		int actionBarHeight = 0;
+		TypedValue tv = new TypedValue();
+		if (activity.getTheme().resolveAttribute(android.R.attr.actionBarSize,
+				tv, true)) {
+			actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data,
+					activity.getResources().getDisplayMetrics());
+		}
+		return actionBarHeight;
 	}
 }

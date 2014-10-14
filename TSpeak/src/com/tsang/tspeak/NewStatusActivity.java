@@ -65,7 +65,7 @@ import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-public class NewStatusActivity extends BaseActivity  implements
+public class NewStatusActivity extends ActionBarActivity  implements
 		RequestListener {
 
 	public static final String TAG = "NewStatusActivity";
