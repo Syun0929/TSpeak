@@ -23,6 +23,7 @@ import com.tsang.tspeak.model.Weibo;
 import com.tsang.tspeak.util.Constants;
 import com.tsang.tspeak.util.Utils;
 import com.tsang.tspeak.view.fab.FloatingActionButton;
+import com.tsang.tspeak.view.fab.FloatingActionButton.FabOnScrollListener;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
@@ -46,7 +47,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class HomeFragment extends Fragment implements OnRefreshListener,
-		OnScrollListener, OnItemClickListener {
+		OnItemClickListener {
 
 	private static final String TAG = "HomeFragment";
 	private PullToRefreshLayout mPullToRefreshLayout;
@@ -67,6 +68,8 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 	public HomeFragment() {
 		super();
 	}
+
+	FloatingActionButton floatingActionButton;
 
 	public static HomeFragment newInstance(Context context, String token,
 			int count, int page) {
@@ -91,17 +94,10 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 				.listener(this).setup(mPullToRefreshLayout);
 
 		mHomeList = (ListView) view.findViewById(R.id.ptr_homelist);
-		mWeiboAdapter = new WeiboAdapter(mContext);
-		AnimationAdapter AnimationAdapter = new SwingBottomInAnimationAdapter(
-				mWeiboAdapter);
-		AnimationAdapter.setAbsListView(mHomeList);
-		mHomeList.setAdapter(AnimationAdapter);
-		mHomeList.setOnScrollListener(this);
-		mHomeList.setOnItemClickListener(this);
 
-		FloatingActionButton floatingActionButton = (FloatingActionButton) view
+		floatingActionButton = (FloatingActionButton) view
 				.findViewById(R.id.button_floating_action);
-		floatingActionButton.attachToListView(mHomeList);
+
 		floatingActionButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -118,6 +114,31 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 			}
 		});
 
+		mWeiboAdapter = new WeiboAdapter(mContext);
+		// AnimationAdapter AnimationAdapter = new
+		// SwingBottomInAnimationAdapter(
+		// mWeiboAdapter);
+		// AnimationAdapter.setAbsListView(mHomeList);
+		mHomeList.setAdapter(mWeiboAdapter);
+
+		mHomeList.setOnItemClickListener(this);
+		floatingActionButton.attachToListView(mHomeList,
+				new FabOnScrollListener() {
+
+					@Override
+					public void onScroll(AbsListView view,
+							int firstVisibleItem, int visibleItemCount,
+							int totalItemCount) {
+						// TODO Auto-generated method stub
+						super.onScroll(view, firstVisibleItem,
+								visibleItemCount, totalItemCount);
+						int lastInScreen = firstVisibleItem + visibleItemCount;
+						if (lastInScreen >= totalItemCount) {
+							AddItemToContainer(++mPage, PUSH_TO_LOADMORE);
+						}
+					}
+
+				});
 		AddItemToContainer(1, PULL_TO_REFRESH);
 
 		return view;
@@ -134,16 +155,6 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 	public void onRefreshStarted(View view) {
 		// TODO Auto-generated method stub
 		AddItemToContainer(1, PULL_TO_REFRESH);
-	}
-
-	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem,
-			int visibleItemCount, int totalItemCount) {
-		// TODO Auto-generated method stub
-		int lastInScreen = firstVisibleItem + visibleItemCount;
-		if (lastInScreen >= totalItemCount) {
-			AddItemToContainer(++mPage, PUSH_TO_LOADMORE);
-		}
 	}
 
 	@Override
@@ -349,25 +360,6 @@ public class HomeFragment extends Fragment implements OnRefreshListener,
 			return weiboList;
 		}
 
-	}
-
-	@Override
-	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		// TODO Auto-generated method stub
-		switch (scrollState) {
-		case OnScrollListener.SCROLL_STATE_FLING:
-			mWeiboAdapter.setFlagBusy(true);
-			break;
-		case OnScrollListener.SCROLL_STATE_IDLE:
-			mWeiboAdapter.setFlagBusy(false);
-			break;
-		case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-			mWeiboAdapter.setFlagBusy(false);
-			break;
-		default:
-			break;
-		}
-		mWeiboAdapter.notifyDataSetChanged();
 	}
 
 	@Override
