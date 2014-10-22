@@ -17,6 +17,8 @@ import com.tsang.tspeak.model.Emotions;
 import com.tsang.tspeak.model.LoginInfo;
 import com.tsang.tspeak.model.db.TSpeakDataHelper;
 import com.tsang.tspeak.util.Utils;
+import com.tsang.tspeak.view.drawer.ActionBarDrawerToggle;
+import com.tsang.tspeak.view.drawer.DrawerArrowDrawable;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -29,7 +31,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.AsyncTask.Status;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -58,6 +59,7 @@ public class MainActivity extends BaseActivity {
 
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
+	private DrawerArrowDrawable drawerArrow;
 	private LinearLayout mDrawerContent;
 	private ListView mDrawerMenuList;
 	private int mCurrentMenuItemPosition = -1;
@@ -89,8 +91,14 @@ public class MainActivity extends BaseActivity {
 		Utils.setStatusBarTheme(this, mLayout);
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
 				GravityCompat.START);
+		drawerArrow = new DrawerArrowDrawable(this) {
+            @Override
+            public boolean isLayoutRtl() {
+                return false;
+            }
+        };
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-				R.drawable.main_actionbar_icon, // Drawer µÄ Icon
+				drawerArrow, // Drawer µÄ Icon
 				R.string.open_left_drawer, R.string.close_left_drawer) {
 
 			@Override
@@ -99,7 +107,7 @@ public class MainActivity extends BaseActivity {
 				super.onDrawerClosed(drawerView);
 
 				getSupportActionBar().setTitle(R.string.homepage);
-
+				invalidateOptionsMenu();
 			}
 
 			@Override
@@ -107,12 +115,14 @@ public class MainActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				super.onDrawerOpened(drawerView);
 				getSupportActionBar().setTitle(R.string.app_all_name);
-
+				invalidateOptionsMenu();
 			}
 		};
 
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-
+		mDrawerToggle.syncState();
+		
+		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);

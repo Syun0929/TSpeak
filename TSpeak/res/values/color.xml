@@ -11,4 +11,5 @@
     <color name="actionbar_bg">#00ace7</color>
     <color name="actionbar_bg_pressed">#0f92bf</color>
 
+    <color name="ldrawer_color">#FFFFFF</color>
 </resources>

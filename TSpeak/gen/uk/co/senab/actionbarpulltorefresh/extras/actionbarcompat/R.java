@@ -163,7 +163,7 @@ public final class R {
 		public static final int spb_default_reversed = 0x7f0a0000;
 	}
 	public static final class color {
-		public static final int abc_search_url_text_holo = 0x7f060010;
+		public static final int abc_search_url_text_holo = 0x7f060011;
 		public static final int abc_search_url_text_normal = 0x7f060002;
 		public static final int abc_search_url_text_pressed = 0x7f060004;
 		public static final int abc_search_url_text_selected = 0x7f060003;
